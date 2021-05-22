@@ -13,10 +13,12 @@ class homeDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
         return Scaffold(
-          appBar: AppBar(),
-            backgroundColor: Colors.transparent,
+          appBar: AppBar(
+              backgroundColor: Colors.transparent,
+            ),
+          backgroundColor: context.canvasColor,
           bottomNavigationBar: Container(
-            color: Colors.white,
+            color: context.cardColor,
             child: ButtonBar(
                 alignment: MainAxisAlignment.spaceBetween,
                 buttonPadding: EdgeInsets.zero,
@@ -26,7 +28,7 @@ class homeDetailPage extends StatelessWidget {
                     onPressed: (){},
                     style: ButtonStyle(
                       backgroundColor:
-                        MaterialStateProperty.all(MyTheme.darkBluishColor),
+                        MaterialStateProperty.all(context.theme.buttonColor),
                       shape: MaterialStateProperty.all(StadiumBorder(),), 
                     ),
                     child: "Add to Cart".text.make(),
@@ -48,11 +50,11 @@ class homeDetailPage extends StatelessWidget {
                     arcType: VxArcType.CONVEY,
                     edge: VxEdge.TOP,
                     child: Container(
-                      color: Colors.white,
+                      color: context.cardColor,
                       width: context.screenWidth,
                       child: Column(
                         children: [
-                          catalog.name.text.xl4.color(MyTheme.darkBluishColor).bold.make(),
+                          catalog.name.text.xl4.color(context.accentColor).bold.make(),
                           catalog.desc.text.textStyle(context.captionStyle).xl.make(),10.heightBox,
                           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In cursus ipsum a eros pulvinar feugiat. Aliquam mollis tincidunt magna ut molestie. Nam iaculis rutrum diam, et fringilla risus vulputate quis. Curabitur lacinia nisl tortor. Donec aliquet risus vel orci convallis aliquet. Curabitur interdum auctor nunc, non euismod lectus faucibus sed. Duis ac ullamcorper felis. Praesent feugiat elementum tortor, vitae tristique quam elementum ut. Donec nisi nisl, sagittis pellentesque porttitor laoreet, pulvinar vel tellus."
                           .text.textStyle(context.captionStyle).make().p16(),
