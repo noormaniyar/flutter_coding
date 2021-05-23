@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utils/routes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -12,23 +11,20 @@ class _LoginPageState extends State<LoginPage> {
   String name = "";
   bool changeButton = false;
 
-  final _formkey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   moveToHome(BuildContext context) async {
-    if (_formkey.currentState.validate()){
+    if (_formKey.currentState.validate()) {
       setState(() {
         changeButton = true;
       });
-
       await Future.delayed(Duration(seconds: 1));
       await Navigator.pushNamed(context, MyRoutes.homeRoute);
       setState(() {
-        changeButton = true;
+        changeButton = false;
       });
     }
-    
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +32,11 @@ class _LoginPageState extends State<LoginPage> {
         color: context.canvasColor,
         child: SingleChildScrollView(
           child: Form(
-            key: _formkey,
+            key: _formKey,
             child: Column(
               children: [
                 Image.asset(
-                  "assets/images/login_image.png",
+                  "assets/images/hey.png",
                   fit: BoxFit.cover,
                 ),
                 SizedBox(
@@ -66,9 +62,9 @@ class _LoginPageState extends State<LoginPage> {
                           hintText: "Enter username",
                           labelText: "Username",
                         ),
-                        validator: (value){
-                          if (value.isEmpty){
-                            return "Username cannot be empty.";
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return "Username cannot be empty";
                           }
 
                           return null;
@@ -84,11 +80,11 @@ class _LoginPageState extends State<LoginPage> {
                           hintText: "Enter password",
                           labelText: "Password",
                         ),
-                        validator: (value){
-                          if (value.isEmpty){
-                            return "Password cannot empty";
-                          } else if (value.length < 6){
-                            return "password length should be atleast 6";
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return "Password cannot be empty";
+                          } else if (value.length < 6) {
+                            return "Password length should be atleast 6";
                           }
 
                           return null;
@@ -97,13 +93,12 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(
                         height: 40.0,
                       ),
-
                       Material(
                         color: context.theme.buttonColor,
                         borderRadius:
-                          BorderRadius.circular(changeButton ? 50 : 8),
+                            BorderRadius.circular(changeButton ? 50 : 8),
                         child: InkWell(
-                          onTap: ()=>moveToHome(context),
+                          onTap: () => moveToHome(context),
                           child: AnimatedContainer(
                             duration: Duration(seconds: 1),
                             width: changeButton ? 50 : 150,
@@ -113,8 +108,8 @@ class _LoginPageState extends State<LoginPage> {
                                 ? Icon(
                                     Icons.done,
                                     color: Colors.white,
-                                  ):
-                                  Text(
+                                  )
+                                : Text(
                                     "Login",
                                     style: TextStyle(
                                         color: Colors.white,
