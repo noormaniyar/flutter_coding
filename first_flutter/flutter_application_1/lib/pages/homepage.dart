@@ -18,9 +18,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // final int days = 30;
+  final int days = 30;
 
-  final String name = "Nooruddin Maniyar";
+  final String name = "Codepur";
 
   @override
   void initState() {
@@ -29,6 +29,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   loadData() async {
+    await Future.delayed(Duration(seconds: 2));
     final catalogJson =
         await rootBundle.loadString("assets/files/catalog.json");
     final decodedData = jsonDecode(catalogJson);
@@ -38,32 +39,33 @@ class _HomePageState extends State<HomePage> {
         .toList();
     setState(() {});
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyTheme.creamColor,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.pushNamed(context, MyRoutes.cartRoute),
-        backgroundColor: MyTheme.darkBluishColor,
-        child: Icon(
-          CupertinoIcons.cart,
-          color: Colors.white,
-        ),
-      ),
-      body: SafeArea(
-        child:Container(
-          padding: Vx.m32,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CatalogHeader(),
-              if(CatalogModel.items !=null && CatalogModel.items.isNotEmpty)
-                CatalogList().py16().expand()
-              else
-                CircularProgressIndicator().centered().expand(),
-            ],
+        backgroundColor: context.canvasColor,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => Navigator.pushNamed(context, MyRoutes.cartRoute),
+          backgroundColor: context.theme.buttonColor,
+          child: Icon(
+            CupertinoIcons.cart,
+            color: Colors.white,
           ),
-        ), 
-      )
-    );
-  }}
+        ),
+        body: SafeArea(
+          child: Container(
+            padding: Vx.m32,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CatalogHeader(),
+                if (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
+                  CatalogList().py16().expand()
+                else
+                  CircularProgressIndicator().centered().expand(),
+              ],
+            ),
+          ),
+        ));
+  }
+}
